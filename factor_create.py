@@ -374,7 +374,8 @@ def database(start_date, end_date, resample_period = "Q"):
         print (db_quarter_lst)
         print (df_quarter_lst)
         
-        cols_to_drop = ["ocf", "capex", "acquisition", "buyback", "da", "sbcomp", "sales", "opincome", "pretaxincome", "netincome", "incometax", "gaapeps", "dps", "sharesos", "cash", "assets", "stdebt", "ltdebt", "equity"]
+        cols_to_drop = ["ocf", "capex", "acquisition", "buyback", "da", "sbcomp", "sales", "opincome", "pretaxincome", 
+                        "netincome", "incometax", "gaapeps", "dps", "sharesos", "cash", "assets", "stdebt", "ltdebt", "equity"]
         factor_df = factor_df.drop(cols_to_drop, axis = 1)
         
         # Only reatins factor data post 2015 
@@ -395,4 +396,6 @@ def database(start_date, end_date, resample_period = "Q"):
 
 #z = database(start_date = "2012-01-01", end_date = "2019-07-10")
 
+# Note the model breaks down for companies that couldn't be scraped from the edgar filings hence no fundamental data for such companies
+# in the database. I haven't built a work around for those names intentionally to keep track of names for which there is no fundamental data.
 
