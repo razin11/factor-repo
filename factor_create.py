@@ -19,12 +19,12 @@ import math
 
 from functools import reduce
 
-conn = pymysql.connect(host = "localhost", user = "root", passwd = "13Tallabagh")
+conn = pymysql.connect(host = [host_name], user = [user_name], passwd = [password])
 cur = conn.cursor()
 
 cur.execute("use financial_database1")
 
-engine = create_engine("mysql+pymysql://root: 13Tallabagh@localhost: 3306/financial_database1")
+engine = create_engine("mysql+pymysql://[user_name]:[password]@[host_name]: [port_no.]/[database_name]")
 
 
 def cfs(ticker):
@@ -394,6 +394,5 @@ def database(start_date, end_date, resample_period = "Q"):
 
 
 #z = database(start_date = "2012-01-01", end_date = "2019-07-10")
-#f = z[0]
-#failed = z[1]
+
 
