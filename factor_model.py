@@ -20,10 +20,10 @@ engine = create_engine("mysql+pymysql://[user_name]: [password]@[host_name]: 330
 # For factors including / enclose it within small slash (`xxxx`)
 def z_score(date, factorDct):
     
-    ## The function gets data from the factor table in the database and normalizes the 
-    ## data (calculates z-scores) based on sector averages. Then weights the scores based 
-    ## on provided weights and sum all the scores of the factors to obtain final scores
-    ## for each company. Each company is ranked based on the scores
+    # The function gets data from the factor table in the database and normalizes the 
+    # data (calculates z-scores) based on sector averages. Then weights the scores based 
+    # on provided weights and sum all the scores of the factors to obtain final scores
+    # for each company. Each company is ranked based on the scores
     
     # Creating the sql query that will be used to retrieve data from the factor table
     sqlQuery = "select"
@@ -95,8 +95,8 @@ def z_score(date, factorDct):
 
 def basket(date, factorDct):
     
-    ## The basket function picks top 15% company from every sector
-    ##  and generate an investment basket
+    # The basket function picks top 15% company from every sector
+    #  and generate an investment basket
     
     df = z_score(date, factorDct)
     
