@@ -19,12 +19,12 @@ import math
 
 from functools import reduce
 
-conn = pymysql.connect(host = "localhost", user = "root", passwd = "13Tallabagh")
+conn = pymysql.connect(host = [host_name], user = [user_name], passwd = [password])
 cur = conn.cursor()
 
-cur.execute("use financial_database1")
+cur.execute("use [database_name]")
 
-engine = create_engine("mysql+pymysql://root: 13Tallabagh@localhost: 3306/financial_database1")
+engine = create_engine("mysql+pymysql://[user_name]: [password]@[host_name]: 3306/[database_name]")
 
 
 def cfs(ticker):
