@@ -10,15 +10,20 @@ import numpy as np
 import pymysql
 from  sqlalchemy import create_engine
 
-conn = pymysql.connect(host = "localhost", user = "root", passwd = "13Tallabagh")
+conn = pymysql.connect(host = [host_name], user = [user_name], passwd = [password])
 cur = conn.cursor()
 
-cur.execute("use financial_database1")
+cur.execute("use [database_name]")
 
-engine = create_engine("mysql+pymysql://root: 13Tallabagh@localhost: 3306/financial_database1")
+engine = create_engine("mysql+pymysql://[user_name]: [password]@[host_name]: 3306/[database_name]")
 
 # For factors including / enclose it within small slash (`xxxx`)
 def z_score(date, factorDct):
+    
+    ## The function gets data from the factor table in the database and normalizes the 
+    ## data (calculates z-scores) based on sector averages. Then weights the scores based 
+    ## on provided weights and sum all the scores of the factors to obtain final scores
+    ## for each company. Each company is ranked based on the scores
     
     # Creating the sql query that will be used to retrieve data from the factor table
     sqlQuery = "select"
@@ -87,8 +92,12 @@ def z_score(date, factorDct):
 
 #df = z_score(date = "2019-06-30", factorDct = {"3mon_return": 0.10, "ocf_yield": 0.15, "fcf_yield": 0.30, "gaap_eps_yield": 0.30, "adjoi_ev": 0.15})    
 
-# Pick top 15% company from every sector 
+
 def basket(date, factorDct):
+    
+    ## The basket function picks top 15% company from every sector
+    ##  and generate an investment basket
+    
     df = z_score(date, factorDct)
     
     # Sorting within groups based on column "score"
@@ -142,6 +151,3 @@ df = basket(date = "2019-06-30", factorDct = {"6mon_std": 0.25, "12mon_std": 0.5
 #1) sales_growth
 #2) fcf_growth
 #3) gaapeps_growth
-
-
-
